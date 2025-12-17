@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 :root {
 	--primary: #1a1a1a;
 	--secondary: #fcf7f8;
@@ -22,7 +23,6 @@ body {
 	flex-direction: column;
 }
 
-/* ===== Top Bar ===== */
 .topBar {
 	position: sticky;
 	top: 0;
@@ -50,6 +50,7 @@ body {
 }
 
 .header-center {
+	margin-left: auto;
 	max-width: 420px;
 	width: 100%;
 }
@@ -73,19 +74,16 @@ body {
 	cursor: pointer;
 }
 
-/* ===== Content ===== */
 .content {
 	padding: 2rem;
 }
 
-/* ===== Grid ===== */
 .library-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
 	gap: 1.5rem;
 }
 
-/* ===== Cards ===== */
 .card {
 	position: relative;
 	aspect-ratio: 2 / 3;
@@ -130,7 +128,6 @@ body {
 	opacity: 0.85;
 }
 
-/* Hover reveal */
 .card .gradient * {
 	transform: translateY(30px);
 	transition: transform 0.3s ease;
@@ -160,14 +157,14 @@ body {
 	height: 30px;
 	border-radius: 6px;
 	cursor: pointer;
+	transition: all 0.3s;
 }
 
 .card button:last-child {
-	background: black;
-	color: white;
+	background: var(--primary);
+	color: var(--paper);
 }
 
-/* ===== Modal ===== */
 .modal {
 	position: fixed;
 	inset: 0;
@@ -189,17 +186,6 @@ body {
 	border-radius: 6px;
 	padding: 1.5rem;
 	animation: modalIn 0.2s ease;
-}
-
-@keyframes modalIn {
-	from {
-		opacity: 0;
-		transform: scale(0.95);
-	}
-	to {
-		opacity: 1;
-		transform: scale(1);
-	}
 }
 
 .modal-content h2 {
@@ -249,7 +235,6 @@ body {
 	display: none;
 }
 
-/* ===== Responsive ===== */
 @media (max-width: 768px) {
 	.header-left h1 {
 		font-size: 1.5rem;
