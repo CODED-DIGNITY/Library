@@ -2,11 +2,11 @@ const myLibrary = [];
 const libraryContainer = document.getElementById("library");
 const addMangaBtn = document.getElementById("add-manga-btn");
 
-function Book(title, author, coverUrl, read) {
+function Book(title, author, coverUrl, isRead = false) {
 	this.title = title;
 	this.author = author;
 	this.coverUrl = coverUrl;
-	this.isRead = read;
+	this.isRead = isRead;
 }
 
 function addBookToLibrary(title, author, coverUrl, isRead = false) {
@@ -41,6 +41,7 @@ function renderLibrary() {
 		}
 
 		card.style.backgroundImage = `url(${book.coverUrl})`;
+		card.style.backgroundColor = "#ccc";
 
 		const gradient = document.createElement("div");
 		gradient.classList.add("gradient");
@@ -55,7 +56,7 @@ function renderLibrary() {
 		remove.textContent = "Remove";
 
 		const read = document.createElement("button");
-		read.textContent = "Read";
+		read.textContent = book.isRead ? "Unread" : "Read";
 
 		const buttons = document.createElement("div");
 		buttons.classList.add("buttons");
@@ -67,17 +68,18 @@ function renderLibrary() {
 		gradient.appendChild(buttons);
 		card.appendChild(gradient);
 
-		card.addEventListener("click", () => {
+		read.addEventListener("click", (e) => {
+			e.stopPropagation();
 			toggleReadStatus(index);
+		});
+		remove.addEventListener("click", (e) => {
+			e.stopPropagation();
+			removeBookFromLibrary(index);
 		});
 
 		libraryContainer.appendChild(card);
 	});
 }
-
-addMangaBtn.addEventListener("click", () => {
-	console.log("Add Manga button clicked");
-});
 
 addBookToLibrary(
 	"Chainsaw Man",
@@ -92,3 +94,58 @@ addBookToLibrary(
 	"https://upload.wikimedia.org/wikipedia/en/9/99/Vagabond_%28manga%29_vol._1.png",
 	true
 );
+
+addBookToLibrary(
+	"Demon Slayer",
+	"Koyoharu Gotouge",
+	"https://upload.wikimedia.org/wikipedia/en/0/09/Demon_Slayer_-_Kimetsu_no_Yaiba%2C_volume_1.jpg",
+	true
+);
+
+addBookToLibrary(
+	"My Hero Academia",
+	"Kōhei Horikoshi",
+	"https://upload.wikimedia.org/wikipedia/en/5/5a/Boku_no_Hero_Academia_Volume_1.png",
+	true
+);
+
+addBookToLibrary(
+	"Jujutsu Kaisen",
+	"Gege Akutami",
+	"https://upload.wikimedia.org/wikipedia/en/4/46/Jujutsu_kaisen.jpg",
+	false
+);
+
+const modal = document.getElementById("add-manga-modal");
+const form = document.getElementById("add-manga-form");
+const cancelBtn = document.getElementById("cancel-btn");
+
+addMangaBtn.addEventListener("click", () => {
+	openModal();
+});
+
+cancelBtn.addEventListener("click", closeModal);
+modal.querySelector(".modal-backdrop").addEventListener("click", closeModal);
+
+function openModal() {
+	modal.classList.remove("hidden");
+	form.reset();
+}
+
+function closeModal() {
+	modal.classList.add("hidden");
+}
+
+form.addEventListener("submit", (e) => {
+	e.preventDefault();
+
+	const title = document.getElementById("title-input").value.trim();
+	const author = document.getElementById("author-input").value.trim();
+	const coverUrl = document.getElementById("cover-input").value.trim();
+	const isRead = document.getElementById("read-input").checked;
+
+	if (!title || !author || !coverUrl) return;
+
+	addBookToLibrary(title, author, coverUrl, isRead);
+	closeModal();
+});

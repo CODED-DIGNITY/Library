@@ -11,9 +11,7 @@
 			<header class="topBar">
 				<div class="header">
 					<h1>Manga Library</h1>
-
 					<input type="text" placeholder="Search manga..." class="search" />
-
 					<nav class="nav">
 						<a href="#">Home</a>
 						<a href="#">Library</a>
@@ -21,15 +19,41 @@
 						<a href="#">Categories</a>
 					</nav>
 				</div>
-
 				<div class="topRow">
 					<button id="add-manga-btn">+ Add Manga</button>
 				</div>
 			</header>
-
 			<main class="content">
 				<div id="library" class="library-grid"></div>
 			</main>
+		</div>
+		<div class="modal hidden" id="add-manga-modal">
+			<div class="modal-backdrop"></div>
+			<div class="modal-content">
+				<h2>Add Manga</h2>
+				<form id="add-manga-form">
+					<label>
+						Title
+						<input type="text" id="title-input" required />
+					</label>
+					<label>
+						Author
+						<input type="text" id="author-input" required />
+					</label>
+					<label>
+						Cover URL
+						<input type="url" id="cover-input" required />
+					</label>
+					<label class="checkbox">
+						<input type="checkbox" id="read-input" />
+						Already read
+					</label>
+					<div class="modal-actions">
+						<button type="button" id="cancel-btn">Cancel</button>
+						<button type="submit">Add</button>
+					</div>
+				</form>
+			</div>
 		</div>
 
 		<script src="script.js"></script>

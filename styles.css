@@ -81,7 +81,7 @@ body {
 }
 
 .card.read {
-	filter: saturate(0);
+	filter: saturate(0) brightness(0.9);
 }
 
 .card .gradient {
@@ -107,13 +107,96 @@ body {
 	font-size: 0.8rem;
 	opacity: 0.85;
 }
+.card .gradient * {
+	transform: translateY(30px);
+	transition: transform 0.3s;
+}
+.card:hover .gradient * {
+	transform: translateY(0px);
+}
 .card .buttons {
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.2s;
 	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
 }
+.card:hover .buttons {
+	opacity: 1;
+	pointer-events: auto;
+}
 .card button {
 	width: 80px;
 	height: 30px;
+}
+.hidden {
+	display: none;
+}
+
+/* Modal shell */
+.modal {
+	position: fixed;
+	inset: 0;
+	z-index: 100;
+}
+
+.modal-backdrop {
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.7);
+}
+
+/* Modal box */
+.modal-content {
+	position: relative;
+	max-width: 400px;
+	margin: 10vh auto;
+	background: white;
+	border: 2px solid black;
+	padding: 1.5rem;
+}
+
+/* Form */
+.modal-content h2 {
+	margin-bottom: 1rem;
+}
+
+.modal-content form {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.modal-content label {
+	display: flex;
+	flex-direction: column;
+	font-size: 0.9rem;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="url"] {
+	padding: 0.4rem;
+	border: 1px solid black;
+}
+
+.checkbox {
+	flex-direction: row;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.modal-actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 0.5rem;
+	margin-top: 1rem;
+}
+
+.modal-actions button {
+	padding: 0.4rem 0.8rem;
+	border: 2px solid black;
+	background: white;
+	cursor: pointer;
 }
