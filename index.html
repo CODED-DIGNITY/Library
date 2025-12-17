@@ -9,20 +9,20 @@
 	<body>
 		<div class="container">
 			<header class="topBar">
-				<div class="header">
-					<h1>Manga Library</h1>
-					<input type="text" placeholder="Search manga..." class="search" />
-					<nav class="nav">
-						<a href="#">Home</a>
-						<a href="#">Library</a>
-						<a href="#">Authors</a>
-						<a href="#">Categories</a>
-					</nav>
+				<div class="header-left">
+					<h1>Manga Shelf</h1>
+					<span class="subtitle">Your collection</span>
 				</div>
-				<div class="topRow">
-					<button id="add-manga-btn">+ Add Manga</button>
+
+				<div class="header-center">
+					<input type="text" placeholder="Search manga..." class="search" />
+				</div>
+
+				<div class="header-right">
+					<button id="add-manga-btn">+</button>
 				</div>
 			</header>
+
 			<main class="content">
 				<div id="library" class="library-grid"></div>
 			</main>

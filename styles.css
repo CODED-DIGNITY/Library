@@ -1,3 +1,9 @@
+:root {
+	--primary: #1a1a1a;
+	--secondary: #fcf7f8;
+	--paper: #f5f5f5;
+}
+
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -5,8 +11,8 @@
 }
 
 body {
-	font-family: system-ui, sans-serif;
-	background: #f5f5f5;
+	font-family: "Inter", system-ui, -apple-system, sans-serif;
+	background: var(--paper);
 	color: #111;
 }
 
@@ -16,64 +22,84 @@ body {
 	flex-direction: column;
 }
 
+/* ===== Top Bar ===== */
 .topBar {
-	background: white;
-	border-bottom: 2px solid black;
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: var(--primary);
+	color: white;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 	padding: 1rem 2rem;
-}
-
-.header {
-	display: flex;
+	display: grid;
+	grid-template-columns: auto 1fr auto;
 	align-items: center;
 	gap: 1.5rem;
 }
 
-.header h1 {
-	margin-right: auto;
+.header-left h1 {
+	font-family: "Oswald", sans-serif;
+	font-weight: 500;
+	font-size: 2rem;
+	line-height: 1;
 }
 
+.subtitle {
+	font-size: 0.75rem;
+	opacity: 0.6;
+}
+
+.header-center {
+	max-width: 420px;
+	width: 100%;
+}
+
+.search {
+	width: 100%;
+	padding: 0.5rem 0.75rem;
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	border-radius: 25px;
+	background: white;
+}
+
+#add-manga-btn {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	border: 2px solid var(--primary);
+	background: var(--secondary);
+	color: var(--primary);
+	font-size: 2.1rem;
+	cursor: pointer;
+}
+
+/* ===== Content ===== */
 .content {
 	padding: 2rem;
 }
 
-.topRow {
-	margin-top: 1rem;
-}
-
-.nav a {
-	text-decoration: none;
-	color: black;
-	font-weight: 500;
-}
-
-.search {
-	padding: 0.4rem 0.6rem;
-	border: 1px solid black;
-}
-
-#add-manga-btn {
-	padding: 0.5rem 1rem;
-	border: 2px solid black;
-	background: white;
-	cursor: pointer;
-	font-weight: bold;
-}
-
+/* ===== Grid ===== */
 .library-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
 	gap: 1.5rem;
 }
 
+/* ===== Cards ===== */
 .card {
 	position: relative;
 	aspect-ratio: 2 / 3;
 	background-size: cover;
 	background-position: center;
 	border: 2px solid black;
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 	cursor: pointer;
 	overflow: hidden;
-	transition: filter 0.25s;
+	transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.card:hover {
+	transform: translateY(-8px);
 }
 
 .card.read {
@@ -86,7 +112,7 @@ body {
 	left: 0;
 	right: 0;
 	height: 40%;
-	background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+	background: linear-gradient(to top, rgba(20, 20, 20, 0.9), transparent);
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
@@ -104,23 +130,24 @@ body {
 	opacity: 0.85;
 }
 
+/* Hover reveal */
 .card .gradient * {
 	transform: translateY(30px);
-	transition: transform 0.3s;
+	transition: transform 0.3s ease;
 }
 
 .card:hover .gradient * {
-	transform: translateY(0px);
+	transform: translateY(0);
 }
 
 .card .buttons {
-	opacity: 0;
-	pointer-events: none;
-	transition: opacity 0.2s;
+	margin-top: 5px;
 	width: 100%;
 	display: flex;
-	align-items: center;
 	justify-content: space-around;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
 }
 
 .card:hover .buttons {
@@ -131,8 +158,16 @@ body {
 .card button {
 	width: 80px;
 	height: 30px;
+	border-radius: 6px;
+	cursor: pointer;
 }
 
+.card button:last-child {
+	background: black;
+	color: white;
+}
+
+/* ===== Modal ===== */
 .modal {
 	position: fixed;
 	inset: 0;
@@ -149,9 +184,22 @@ body {
 	position: relative;
 	max-width: 400px;
 	margin: 10vh auto;
-	background: white;
+	background: var(--secondary);
 	border: 2px solid black;
+	border-radius: 6px;
 	padding: 1.5rem;
+	animation: modalIn 0.2s ease;
+}
+
+@keyframes modalIn {
+	from {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
 }
 
 .modal-content h2 {
@@ -194,8 +242,20 @@ body {
 	border: 2px solid black;
 	background: white;
 	cursor: pointer;
+	border-radius: 6px;
 }
 
 .hidden {
 	display: none;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+	.header-left h1 {
+		font-size: 1.5rem;
+	}
+
+	.library-grid {
+		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	}
 }
