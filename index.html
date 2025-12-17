@@ -3,16 +3,35 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Library</title>
+		<title>Manga Library</title>
 		<link rel="stylesheet" href="styles.css" />
 	</head>
 	<body>
 		<div class="container">
-			<div class="topBar">
-				<div class="header"></div>
-				<div class="topRow"></div>
-			</div>
-			<div class="content"></div>
+			<header class="topBar">
+				<div class="header">
+					<h1>Manga Library</h1>
+
+					<input type="text" placeholder="Search manga..." class="search" />
+
+					<nav class="nav">
+						<a href="#">Home</a>
+						<a href="#">Library</a>
+						<a href="#">Authors</a>
+						<a href="#">Categories</a>
+					</nav>
+				</div>
+
+				<div class="topRow">
+					<button id="add-manga-btn">+ Add Manga</button>
+				</div>
+			</header>
+
+			<main class="content">
+				<div id="library" class="library-grid"></div>
+			</main>
 		</div>
+
+		<script src="script.js"></script>
 	</body>
 </html>
