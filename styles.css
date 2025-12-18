@@ -12,7 +12,7 @@
 }
 
 body {
-	font-family: "Inter", system-ui, -apple-system, sans-serif;
+	font-family: "Inter", sans-serif;
 	background: var(--paper);
 	color: #111;
 }
@@ -62,8 +62,12 @@ body {
 	border-radius: 25px;
 	background: white;
 }
+.search:focus {
+	outline: 2px solid wheat;
+}
 
 #add-manga-btn {
+	font-family: sans-serif;
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;
@@ -185,7 +189,6 @@ body {
 	border: 2px solid black;
 	border-radius: 6px;
 	padding: 1.5rem;
-	animation: modalIn 0.2s ease;
 }
 
 .modal-content h2 {
