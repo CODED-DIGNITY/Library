@@ -98,6 +98,8 @@ body {
 	cursor: pointer;
 	overflow: hidden;
 	transition: transform 0.25s ease, filter 0.25s ease;
+	-webkit-touch-callout: none;
+	user-select: none;
 }
 
 .card:hover {
@@ -246,4 +248,7 @@ body {
 	.library-grid {
 		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 	}
+}
+* {
+	-webkit-tap-highlight-color: transparent;
 }
