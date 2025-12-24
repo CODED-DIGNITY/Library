@@ -6,11 +6,13 @@ const modal = document.getElementById("add-manga-modal");
 const form = document.getElementById("add-manga-form");
 const cancelBtn = document.getElementById("cancel-btn");
 
-function Book(title, author, coverUrl, isRead = false) {
-	this.title = title;
-	this.author = author;
-	this.coverUrl = coverUrl;
-	this.isRead = isRead;
+class Book {
+	constructor(title, author, coverUrl, isRead = false) {
+		this.title = title;
+		this.author = author;
+		this.coverUrl = coverUrl;
+		this.isRead = isRead;
+	}
 }
 
 function addBookToLibrary(title, author, coverUrl, isRead = false) {
