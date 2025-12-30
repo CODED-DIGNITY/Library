@@ -5,6 +5,9 @@ const addMangaBtn = document.getElementById("add-manga-btn");
 const modal = document.getElementById("add-manga-modal");
 const form = document.getElementById("add-manga-form");
 const cancelBtn = document.getElementById("cancel-btn");
+const titleInput = document.getElementById("title-input");
+const authorInput = document.getElementById("author-input");
+const coverInput = document.getElementById("cover-input");
 
 function Book(title, author, coverUrl, isRead = false) {
 	this.title = title;
@@ -96,9 +99,41 @@ modal.querySelector(".modal-backdrop").addEventListener("click", closeModal);
 form.addEventListener("submit", (e) => {
 	e.preventDefault();
 
-	const title = document.getElementById("title-input").value.trim();
-	const author = document.getElementById("author-input").value.trim();
-	const coverUrl = document.getElementById("cover-input").value.trim();
+	titleInput.setCustomValidity("");
+	authorInput.setCustomValidity("");
+	coverInput.setCustomValidity("");
+
+	let isValid = true;
+
+	if (titleInput.value.trim() === "") {
+		titleInput.setCustomValidity("Please enter a title.");
+		isValid = false;
+	}
+	if (authorInput.value.trim() === "") {
+		authorInput.setCustomValidity("Please enter an author.");
+		isValid = false;
+	}
+	const urlString = coverInput.value.trim();
+
+	try {
+		const testUrl = new URL(urlString);
+		if (testUrl.protocol !== "http:" && testUrl.protocol !== "https:") {
+			throw new Error("Invalid protocol");
+		}
+	} catch (error) {
+		coverInput.setCustomValidity(
+			"Please enter a valid URL starting with http:// or https://"
+		);
+		isValid = false;
+	}
+
+	if (!isValid) {
+		form.reportValidity();
+		return;
+	}
+	const title = titleInput.value.trim();
+	const author = authorInput.value.trim();
+	const coverUrl = coverInput.value.trim();
 	const isRead = document.getElementById("read-input").checked;
 
 	if (!title || !author || !coverUrl) return;
